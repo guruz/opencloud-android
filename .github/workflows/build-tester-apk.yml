@@ -89,16 +89,17 @@ jobs:
           echo "artifact_name=$NAME" >> $GITHUB_OUTPUT
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.set_artifact.outputs.artifact_name }}
           path: ./${{ steps.set_artifact.outputs.artifact_name }}
           compression-level: 0
+          archive: false
 
-      - name: Upload APK to release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: build-tester-apk-${{ github.run_number }}
-          name: build-tester-apk build ${{ github.run_number }}
-          files: ${{ steps.set_artifact.outputs.artifact_name }}
-          prerelease: true
+      #- name: Upload APK to release
+      #  uses: softprops/action-gh-release@v2
+      #  with:
+      #    tag_name: build-tester-apk-${{ github.run_number }}
+      #    name: build-tester-apk build ${{ github.run_number }}
+      #    files: ${{ steps.set_artifact.outputs.artifact_name }}
+      #    prerelease: true
